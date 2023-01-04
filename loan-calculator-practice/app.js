@@ -33,3 +33,28 @@ function calculateResults(e){
     e.preventDefault()
 }
 
+//creating the showError function
+function showError(error){
+    //create an element
+    const errorDiv = document.createElement('div')
+
+    //positioning the error message
+    const card = document.querySelector('.card')
+    const heading = document.querySelector('.heading')
+
+
+    //add a class to the already created element
+    errorDiv.className = 'alert alert-danger'
+
+    //add text to created div
+    errorDiv.appendChild(document.createTextNode(error))
+   
+    card.insertBefore(errorDiv, heading)
+
+    setTimeout(clearError, 3000)
+
+}
+
+function clearError(){
+    document.querySelector('.alert').remove()
+}

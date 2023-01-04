@@ -1,7 +1,18 @@
-document.getElementById('loan-form').addEventListener('submit', calculateResults)
+document.getElementById('loan-form').addEventListener('submit', function(e){
+
+    document.getElementById('results').style.display = 'none'
+    
+    document.getElementById('loading').style.display = 'block'
+
+    
+
+    setTimeout(calculateResults, 2000)
+
+    e.preventDefault()
+})
 
 //create the function
-function calculateResults(e){
+function calculateResults(){
     console.log('This works')
     const amount = document.getElementById('amount')
     const interest = document.getElementById('interest')
@@ -17,20 +28,26 @@ function calculateResults(e){
     const x = Math.pow(1 + calculatedInterest, calculatedPayments)
     const monthly = (principal * x * calculatedInterest) / (x - 1)
 
+    //show results
+    document.getElementById('results').style.display = 'block'
+
+    //hide loader
+    document.getElementById('loading').style.display = 'none'
+
     //to check if the value you are getting from users input is a number
     if(isFinite(monthly)){
         monthlyPayment.value = monthly.toFixed(2)
         totalPayment.value = (monthly * calculatedPayments).toFixed(2)
         totalInterest.value = ((monthly * calculatedPayments) - principal).toFixed(2)
     }else{
-        console.log('Please input a value')
-
+        
         showError('Please check your numbers')
     }
 
 
+    
 
-    e.preventDefault()
+    
 }
 
 //creating the showError function
